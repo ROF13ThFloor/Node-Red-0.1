@@ -244,7 +244,9 @@ module.exports = function(RED) {
         }
 
         this.on("input", function(msg, send, done) {
+            console.time("Sort");
             processMessage({msg, send, done});
+            console.timeEnd("Sort");
         });
 
         this.on("close", function() {

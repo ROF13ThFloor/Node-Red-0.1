@@ -572,7 +572,7 @@ module.exports = function(RED) {
         }
 
         this.on("input", function(msg, send, done) {
-            console.time("Split2");
+            console.time("Join");
             try {
                 var property;
                 var partId = "_";
@@ -775,7 +775,7 @@ module.exports = function(RED) {
                 done(err);
                 console.log(err.stack);
             }
-            console.timeEnd("Split2");
+            console.timeEnd("Join");
         });
 
         this.on("close", function() {

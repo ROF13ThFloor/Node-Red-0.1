@@ -7,6 +7,7 @@ module.exports = function(RED) {
         this.property = n.property||"payload";
         var node = this;
         this.on("input", function(msg,send,done) {
+            console.time("YAML");
             var value = RED.util.getMessageProperty(msg,node.property);
             if (value !== undefined) {
                 if (typeof value === "string") {
@@ -35,6 +36,7 @@ module.exports = function(RED) {
                 else { node.warn(RED._("yaml.errors.dropped")); done(); }
             }
             else { send(msg); done(); } // If no payload - just pass it on.
+            console.timeEnd("YAML");
         });
     }
     RED.nodes.registerType("yaml",YAMLNode);

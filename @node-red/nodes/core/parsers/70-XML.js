@@ -11,6 +11,7 @@ module.exports = function(RED) {
         this.property = n.property||"payload";
         var node = this;
         this.on("input", function(msg,send,done) {
+            console.time("XML");
             var value = RED.util.getMessageProperty(msg,node.property);
             if (value !== undefined) {
                 var options;
@@ -43,6 +44,7 @@ module.exports = function(RED) {
                 else { node.warn(RED._("xml.errors.xml_js")); done(); }
             }
             else { send(msg); done(); } // If no property - just pass it on.
+            console.timeEnd("XML");
         });
     }
     RED.nodes.registerType("xml",XMLNode);

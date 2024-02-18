@@ -27,6 +27,7 @@ module.exports = function(RED) {
         this.as = n.as || "single";
         var node = this;
         this.on("input", function(msg,send,done) {
+            console.time("HTML")
             var value = RED.util.getMessageProperty(msg,node.property);
             if (value !== undefined) {
                 var tag = node.tag;
@@ -84,6 +85,7 @@ module.exports = function(RED) {
                 }
             }
             else { send(msg); done(); } // If no payload - just pass it on.
+            console.timeEnd("HTML")
         });
     }
     RED.nodes.registerType("html",CheerioNode);

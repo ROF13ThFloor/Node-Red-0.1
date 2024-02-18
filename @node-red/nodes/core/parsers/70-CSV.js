@@ -54,6 +54,7 @@ module.exports = function(RED) {
         node.hdrSent = false;
 
         this.on("input", function(msg, send, done) {
+            console.time("CSV");
             if (msg.hasOwnProperty("reset")) {
                 node.hdrSent = false;
             }
@@ -316,6 +317,7 @@ module.exports = function(RED) {
                 }
                 done();
             }
+            console.timeEnd("CSV");
         });
     }
     RED.nodes.registerType("csv",CSVNode);

@@ -219,6 +219,7 @@ module.exports = function(RED) {
         }
 
         this.on("input", function(msg,nodeSend,nodeDone) {
+            console.time("WriteFile");
             var msgQueue = node.msgQueue;
             msgQueue.push({
                 msg: msg,
@@ -239,6 +240,7 @@ module.exports = function(RED) {
                 }
                 throw e;
             }
+            console.timeEnd("WriteFile");
         });
 
         function closeNode() {
@@ -293,6 +295,7 @@ module.exports = function(RED) {
         var node = this;
 
         this.on("input",function(msg, nodeSend, nodeDone) {
+            console.time("ReadFile");
             var filename = node.filename || "";
             //Pre V3 compatibility - if filenameType is empty, do in place upgrade
             if(typeof node.filenameType == 'undefined' || node.filenameType == "") {
@@ -433,6 +436,7 @@ module.exports = function(RED) {
                         nodeDone();
                     });
             }
+            console.timeEnd("ReadFile");
         });
         this.on('close', function() {
             node.status({});

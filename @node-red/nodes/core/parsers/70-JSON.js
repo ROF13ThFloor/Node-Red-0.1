@@ -31,6 +31,7 @@ module.exports = function(RED) {
         var node = this;
 
         this.on("input", function(msg,send,done) {
+            console.time("JSON");
             var validate = false;
             if (msg.schema) {
                 // If input schema is different, re-compile it
@@ -132,6 +133,7 @@ module.exports = function(RED) {
                 else { node.warn(RED._("json.errors.dropped")); done(); }
             }
             else { send(msg); done(); } // If no property - just pass it on.
+            console.timeEnd("JSON");
         });
     }
     RED.nodes.registerType("json",JSONNode);
